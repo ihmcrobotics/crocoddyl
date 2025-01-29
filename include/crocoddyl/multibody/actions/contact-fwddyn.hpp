@@ -28,7 +28,7 @@ namespace crocoddyl {
  * systems.
  *
  * This class implements contact forward dynamics given a stack of
- * rigid-contacts described in `ContactModelMultipleTpl`, i.e., \f[
+ * rigid-contacts described in `KinematicConstraintModelMultipleTpl`, i.e., \f[
  * \left[\begin{matrix}\dot{\mathbf{v}}
  * \\ -\boldsymbol{\lambda}\end{matrix}\right] = \left[\begin{matrix}\mathbf{M}
  * & \mathbf{J}^{\top}_c \\ {\mathbf{J}_{c}} & \mathbf{0}
@@ -83,7 +83,7 @@ class DifferentialActionModelContactFwdDynamicsTpl
   typedef StateMultibodyTpl<Scalar> StateMultibody;
   typedef CostModelSumTpl<Scalar> CostModelSum;
   typedef ConstraintModelManagerTpl<Scalar> ConstraintModelManager;
-  typedef ContactModelMultipleTpl<Scalar> ContactModelMultiple;
+  typedef KinematicConstraintModelMultipleTpl<Scalar> ContactModelMultiple;
   typedef ActuationModelAbstractTpl<Scalar> ActuationModelAbstract;
   typedef DifferentialActionDataAbstractTpl<Scalar>
       DifferentialActionDataAbstract;
@@ -94,7 +94,7 @@ class DifferentialActionModelContactFwdDynamicsTpl
    * @brief Initialize the contact forward-dynamics action model
    *
    * It describes the dynamics evolution of a multibody system under
-   * rigid-contact constraints defined by `ContactModelMultipleTpl`. It computes
+   * rigid-contact constraints defined by `KinematicConstraintModelMultipleTpl`. It computes
    * the cost described in `CostModelSumTpl`.
    *
    * @param[in] state            State of the multibody system
@@ -118,7 +118,7 @@ class DifferentialActionModelContactFwdDynamicsTpl
    * @brief Initialize the contact forward-dynamics action model
    *
    * It describes the dynamics evolution of a multibody system under
-   * rigid-contact constraints defined by `ContactModelMultipleTpl`. It computes
+   * rigid-contact constraints defined by `KinematicConstraintModelMultipleTpl`. It computes
    * the cost described in `CostModelSumTpl`.
    *
    * @param[in] state            State of the multibody system

@@ -26,6 +26,16 @@ using ContactItemTpl [[deprecated("Use KinematicConstraintItemTpl instead")]] =
     KinematicConstraintItemTpl<_Scalar>;
 
 template <typename _Scalar>
+using ContactModelMultipleTpl
+    [[deprecated("Use KinematicConstraintModelMultipleTpl instead")]] =
+        KinematicConstraintModelMultipleTpl<_Scalar>;
+
+template <typename _Scalar>
+using ContactDataMultipleTpl
+    [[deprecated("Use KinematicConstraintDataMultipleTpl instead")]] =
+        KinematicConstraintDataMultipleTpl<_Scalar>;
+
+template <typename _Scalar>
 struct KinematicConstraintItemTpl {
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
@@ -61,7 +71,7 @@ struct KinematicConstraintItemTpl {
  * routines that update the only active contacts.
  */
 template <typename _Scalar>
-class ContactModelMultipleTpl {
+class KinematicConstraintModelMultipleTpl {
  public:
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
@@ -69,7 +79,7 @@ class ContactModelMultipleTpl {
   typedef MathBaseTpl<Scalar> MathBase;
   typedef StateMultibodyTpl<Scalar> StateMultibody;
   typedef KinematicConstraintDataAbstractTpl<Scalar> ContactDataAbstract;
-  typedef ContactDataMultipleTpl<Scalar> ContactDataMultiple;
+  typedef KinematicConstraintDataMultipleTpl<Scalar> ContactDataMultiple;
   typedef KinematicConstraintModelAbstractTpl<Scalar> ContactModelAbstract;
 
   typedef KinematicConstraintItemTpl<Scalar> ContactItem;
@@ -92,16 +102,16 @@ class ContactModelMultipleTpl {
    * @param[in] state  Multibody state
    * @param[in] nu     Dimension of control vector
    */
-  ContactModelMultipleTpl(boost::shared_ptr<StateMultibody> state,
-                          const std::size_t nu);
+  KinematicConstraintModelMultipleTpl(boost::shared_ptr<StateMultibody> state,
+                                      const std::size_t nu);
 
   /**
    * @brief Initialize the multi-contact model
    *
    * @param[in] state  Multibody state
    */
-  ContactModelMultipleTpl(boost::shared_ptr<StateMultibody> state);
-  ~ContactModelMultipleTpl();
+  KinematicConstraintModelMultipleTpl(boost::shared_ptr<StateMultibody> state);
+  KinematicConstraintModelMultipleTpl();
 
   /**
    * @brief Add contact item
@@ -277,8 +287,9 @@ class ContactModelMultipleTpl {
    * @brief Print information on the contact models
    */
   template <class Scalar>
-  friend std::ostream& operator<<(std::ostream& os,
-                                  const ContactModelMultipleTpl<Scalar>& model);
+  friend std::ostream& operator<<(
+      std::ostream& os,
+      const KinematicConstraintModelMultipleTpl<Scalar>& model);
 
  private:
   boost::shared_ptr<StateMultibody> state_;
@@ -294,15 +305,15 @@ class ContactModelMultipleTpl {
 /**
  * @brief Define the multi-contact data
  *
- * \sa ContactModelMultipleTpl
+ * \sa KinematicConstraintModelMultipleTpl
  */
 template <typename _Scalar>
-struct ContactDataMultipleTpl {
+struct KinematicConstraintDataMultipleTpl {
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
   typedef _Scalar Scalar;
   typedef MathBaseTpl<Scalar> MathBase;
-  typedef ContactModelMultipleTpl<Scalar> ContactModelMultiple;
+  typedef KinematicConstraintModelMultipleTpl<Scalar> ContactModelMultiple;
   typedef KinematicConstraintItemTpl<Scalar> ContactItem;
   typedef typename MathBase::VectorXs VectorXs;
   typedef typename MathBase::MatrixXs MatrixXs;
@@ -314,8 +325,8 @@ struct ContactDataMultipleTpl {
    * @param[in] data   Pinocchio data
    */
   template <template <typename Scalar> class Model>
-  ContactDataMultipleTpl(Model<Scalar>* const model,
-                         pinocchio::DataTpl<Scalar>* const data)
+  KinematicConstraintDataMultipleTpl(Model<Scalar>* const model,
+                                     pinocchio::DataTpl<Scalar>* const data)
       : Jc(model->get_nc_total(), model->get_state()->get_nv()),
         a0(model->get_nc_total()),
         da0_dx(model->get_nc_total(), model->get_state()->get_ndx()),

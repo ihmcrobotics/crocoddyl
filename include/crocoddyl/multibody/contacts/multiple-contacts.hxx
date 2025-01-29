@@ -11,7 +11,8 @@
 namespace crocoddyl {
 
 template <typename Scalar>
-ContactModelMultipleTpl<Scalar>::ContactModelMultipleTpl(
+KinematicConstraintModelMultipleTpl<Scalar>::
+    KinematicConstraintModelMultipleTpl(
     boost::shared_ptr<StateMultibody> state, const std::size_t nu)
     : state_(state),
       nc_(0),
@@ -20,7 +21,8 @@ ContactModelMultipleTpl<Scalar>::ContactModelMultipleTpl(
       compute_all_contacts_(false) {}
 
 template <typename Scalar>
-ContactModelMultipleTpl<Scalar>::ContactModelMultipleTpl(
+KinematicConstraintModelMultipleTpl<Scalar>::
+    KinematicConstraintModelMultipleTpl(
     boost::shared_ptr<StateMultibody> state)
     : state_(state),
       nc_(0),
@@ -29,10 +31,10 @@ ContactModelMultipleTpl<Scalar>::ContactModelMultipleTpl(
       compute_all_contacts_(false) {}
 
 template <typename Scalar>
-ContactModelMultipleTpl<Scalar>::~ContactModelMultipleTpl() {}
+KinematicConstraintModelMultipleTpl<Scalar>::KinematicConstraintModelMultipleTpl() {}
 
 template <typename Scalar>
-void ContactModelMultipleTpl<Scalar>::addContact(
+void KinematicConstraintModelMultipleTpl<Scalar>::addContact(
     const std::string& name, boost::shared_ptr<ContactModelAbstract> contact,
     const bool active) {
   if (contact->get_nu() != nu_) {
@@ -58,7 +60,7 @@ void ContactModelMultipleTpl<Scalar>::addContact(
 }
 
 template <typename Scalar>
-void ContactModelMultipleTpl<Scalar>::removeContact(const std::string& name) {
+void KinematicConstraintModelMultipleTpl<Scalar>::removeContact(const std::string& name) {
   typename ContactModelContainer::iterator it = contacts_.find(name);
   if (it != contacts_.end()) {
     nc_ -= it->second->contact->get_nc();
@@ -73,7 +75,7 @@ void ContactModelMultipleTpl<Scalar>::removeContact(const std::string& name) {
 }
 
 template <typename Scalar>
-void ContactModelMultipleTpl<Scalar>::changeContactStatus(
+void KinematicConstraintModelMultipleTpl<Scalar>::changeContactStatus(
     const std::string& name, const bool active) {
   typename ContactModelContainer::iterator it = contacts_.find(name);
   if (it != contacts_.end()) {
@@ -95,7 +97,7 @@ void ContactModelMultipleTpl<Scalar>::changeContactStatus(
 }
 
 template <typename Scalar>
-void ContactModelMultipleTpl<Scalar>::calc(
+void KinematicConstraintModelMultipleTpl<Scalar>::calc(
     const boost::shared_ptr<ContactDataMultiple>& data,
     const Eigen::Ref<const VectorXs>& x) {
   if (data->contacts.size() != contacts_.size()) {
@@ -151,7 +153,7 @@ void ContactModelMultipleTpl<Scalar>::calc(
 }
 
 template <typename Scalar>
-void ContactModelMultipleTpl<Scalar>::calcDiff(
+void KinematicConstraintModelMultipleTpl<Scalar>::calcDiff(
     const boost::shared_ptr<ContactDataMultiple>& data,
     const Eigen::Ref<const VectorXs>& x) {
   if (data->contacts.size() != contacts_.size()) {
@@ -205,7 +207,7 @@ void ContactModelMultipleTpl<Scalar>::calcDiff(
 }
 
 template <typename Scalar>
-void ContactModelMultipleTpl<Scalar>::updateAcceleration(
+void KinematicConstraintModelMultipleTpl<Scalar>::updateAcceleration(
     const boost::shared_ptr<ContactDataMultiple>& data,
     const VectorXs& dv) const {
   if (static_cast<std::size_t>(dv.size()) != state_->get_nv()) {
@@ -217,7 +219,7 @@ void ContactModelMultipleTpl<Scalar>::updateAcceleration(
 }
 
 template <typename Scalar>
-void ContactModelMultipleTpl<Scalar>::updateForce(
+void KinematicConstraintModelMultipleTpl<Scalar>::updateForce(
     const boost::shared_ptr<ContactDataMultiple>& data, const VectorXs& force) {
   if (static_cast<std::size_t>(force.size()) !=
       (compute_all_contacts_ ? nc_total_ : nc_)) {
@@ -316,7 +318,7 @@ void ContactModelMultipleTpl<Scalar>::updateForce(
 }
 
 template <typename Scalar>
-void ContactModelMultipleTpl<Scalar>::updateAccelerationDiff(
+void KinematicConstraintModelMultipleTpl<Scalar>::updateAccelerationDiff(
     const boost::shared_ptr<ContactDataMultiple>& data,
     const MatrixXs& ddv_dx) const {
   if (static_cast<std::size_t>(ddv_dx.rows()) != state_->get_nv() ||
@@ -330,7 +332,7 @@ void ContactModelMultipleTpl<Scalar>::updateAccelerationDiff(
 }
 
 template <typename Scalar>
-void ContactModelMultipleTpl<Scalar>::updateForceDiff(
+void KinematicConstraintModelMultipleTpl<Scalar>::updateForceDiff(
     const boost::shared_ptr<ContactDataMultiple>& data, const MatrixXs& df_dx,
     const MatrixXs& df_du) const {
   const std::size_t ndx = state_->get_ndx();
@@ -404,7 +406,7 @@ void ContactModelMultipleTpl<Scalar>::updateForceDiff(
 }
 
 template <typename Scalar>
-void ContactModelMultipleTpl<Scalar>::updateRneaDiff(
+void KinematicConstraintModelMultipleTpl<Scalar>::updateRneaDiff(
     const boost::shared_ptr<ContactDataMultiple>& data,
     pinocchio::DataTpl<Scalar>& pinocchio) const {
   if (static_cast<std::size_t>(data->contacts.size()) !=
@@ -428,8 +430,8 @@ void ContactModelMultipleTpl<Scalar>::updateRneaDiff(
 }
 
 template <typename Scalar>
-boost::shared_ptr<ContactDataMultipleTpl<Scalar> >
-ContactModelMultipleTpl<Scalar>::createData(
+boost::shared_ptr<KinematicConstraintDataMultipleTpl<Scalar> >
+KinematicConstraintModelMultipleTpl<Scalar>::createData(
     pinocchio::DataTpl<Scalar>* const data) {
   return boost::allocate_shared<ContactDataMultiple>(
       Eigen::aligned_allocator<ContactDataMultiple>(), this, data);
@@ -437,45 +439,47 @@ ContactModelMultipleTpl<Scalar>::createData(
 
 template <typename Scalar>
 const boost::shared_ptr<StateMultibodyTpl<Scalar> >&
-ContactModelMultipleTpl<Scalar>::get_state() const {
+KinematicConstraintModelMultipleTpl<Scalar>::get_state() const {
   return state_;
 }
 
 template <typename Scalar>
-const typename ContactModelMultipleTpl<Scalar>::ContactModelContainer&
-ContactModelMultipleTpl<Scalar>::get_contacts() const {
+const typename KinematicConstraintModelMultipleTpl<Scalar>::ContactModelContainer&
+KinematicConstraintModelMultipleTpl<Scalar>::get_contacts() const {
   return contacts_;
 }
 
 template <typename Scalar>
-std::size_t ContactModelMultipleTpl<Scalar>::get_nc() const {
+std::size_t KinematicConstraintModelMultipleTpl<Scalar>::get_nc() const {
   return nc_;
 }
 
 template <typename Scalar>
-std::size_t ContactModelMultipleTpl<Scalar>::get_nc_total() const {
+std::size_t KinematicConstraintModelMultipleTpl<Scalar>::get_nc_total() const {
   return nc_total_;
 }
 
 template <typename Scalar>
-std::size_t ContactModelMultipleTpl<Scalar>::get_nu() const {
+std::size_t KinematicConstraintModelMultipleTpl<Scalar>::get_nu() const {
   return nu_;
 }
 
 template <typename Scalar>
-const std::set<std::string>& ContactModelMultipleTpl<Scalar>::get_active_set()
+const std::set<std::string>&
+KinematicConstraintModelMultipleTpl<Scalar>::get_active_set()
     const {
   return active_set_;
 }
 
 template <typename Scalar>
-const std::set<std::string>& ContactModelMultipleTpl<Scalar>::get_inactive_set()
+const std::set<std::string>&
+KinematicConstraintModelMultipleTpl<Scalar>::get_inactive_set()
     const {
   return inactive_set_;
 }
 
 template <typename Scalar>
-bool ContactModelMultipleTpl<Scalar>::getContactStatus(
+bool KinematicConstraintModelMultipleTpl<Scalar>::getContactStatus(
     const std::string& name) const {
   typename ContactModelContainer::const_iterator it = contacts_.find(name);
   if (it != contacts_.end()) {
@@ -488,18 +492,18 @@ bool ContactModelMultipleTpl<Scalar>::getContactStatus(
 }
 
 template <typename Scalar>
-bool ContactModelMultipleTpl<Scalar>::getComputeAllContacts() const {
+bool KinematicConstraintModelMultipleTpl<Scalar>::getComputeAllContacts() const {
   return compute_all_contacts_;
 }
 
 template <typename Scalar>
-void ContactModelMultipleTpl<Scalar>::setComputeAllContacts(const bool status) {
+void KinematicConstraintModelMultipleTpl<Scalar>::setComputeAllContacts(const bool status) {
   compute_all_contacts_ = status;
 }
 
 template <class Scalar>
 std::ostream& operator<<(std::ostream& os,
-                         const ContactModelMultipleTpl<Scalar>& model) {
+                         const KinematicConstraintModelMultipleTpl<Scalar>& model) {
   const auto& active = model.get_active_set();
   const auto& inactive = model.get_inactive_set();
   os << "ContactModelMultiple:" << std::endl;
@@ -507,7 +511,7 @@ std::ostream& operator<<(std::ostream& os,
   for (std::set<std::string>::const_iterator it = active.begin();
        it != active.end(); ++it) {
     const boost::shared_ptr<
-        typename ContactModelMultipleTpl<Scalar>::ContactItem>& contact_item =
+        typename KinematicConstraintModelMultipleTpl<Scalar>::ContactItem>& contact_item =
         model.get_contacts().find(*it)->second;
     if (it != --active.end()) {
       os << "    " << *it << ": " << *contact_item << std::endl;
@@ -519,7 +523,7 @@ std::ostream& operator<<(std::ostream& os,
   for (std::set<std::string>::const_iterator it = inactive.begin();
        it != inactive.end(); ++it) {
     const boost::shared_ptr<
-        typename ContactModelMultipleTpl<Scalar>::ContactItem>& contact_item =
+        typename KinematicConstraintModelMultipleTpl<Scalar>::ContactItem>& contact_item =
         model.get_contacts().find(*it)->second;
     if (it != --inactive.end()) {
       os << "    " << *it << ": " << *contact_item << std::endl;

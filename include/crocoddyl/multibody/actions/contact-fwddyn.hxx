@@ -417,7 +417,7 @@ DifferentialActionModelContactFwdDynamicsTpl<Scalar>::get_actuation() const {
 }
 
 template <typename Scalar>
-const boost::shared_ptr<ContactModelMultipleTpl<Scalar> >&
+const boost::shared_ptr<KinematicConstraintModelMultipleTpl<Scalar> >&
 DifferentialActionModelContactFwdDynamicsTpl<Scalar>::get_contacts() const {
   return contacts_;
 }

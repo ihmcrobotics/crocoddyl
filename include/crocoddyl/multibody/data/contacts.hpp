@@ -22,11 +22,11 @@ struct DataCollectorContactTpl : virtual DataCollectorAbstractTpl<Scalar> {
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
   DataCollectorContactTpl<Scalar>(
-      boost::shared_ptr<ContactDataMultipleTpl<Scalar> > contacts)
+      boost::shared_ptr<KinematicConstraintDataMultipleTpl<Scalar> > contacts)
       : DataCollectorAbstractTpl<Scalar>(), contacts(contacts) {}
   virtual ~DataCollectorContactTpl() {}
 
-  boost::shared_ptr<ContactDataMultipleTpl<Scalar> > contacts;
+  boost::shared_ptr<KinematicConstraintDataMultipleTpl<Scalar> > contacts;
 };
 
 template <typename Scalar>
@@ -36,7 +36,7 @@ struct DataCollectorMultibodyInContactTpl : DataCollectorMultibodyTpl<Scalar>,
 
   DataCollectorMultibodyInContactTpl(
       pinocchio::DataTpl<Scalar>* const pinocchio,
-      boost::shared_ptr<ContactDataMultipleTpl<Scalar> > contacts)
+      boost::shared_ptr<KinematicConstraintDataMultipleTpl<Scalar> > contacts)
       : DataCollectorMultibodyTpl<Scalar>(pinocchio),
         DataCollectorContactTpl<Scalar>(contacts) {}
   virtual ~DataCollectorMultibodyInContactTpl() {}
@@ -51,7 +51,7 @@ struct DataCollectorActMultibodyInContactTpl
   DataCollectorActMultibodyInContactTpl(
       pinocchio::DataTpl<Scalar>* const pinocchio,
       boost::shared_ptr<ActuationDataAbstractTpl<Scalar> > actuation,
-      boost::shared_ptr<ContactDataMultipleTpl<Scalar> > contacts)
+      boost::shared_ptr<KinematicConstraintDataMultipleTpl<Scalar> > contacts)
       : DataCollectorMultibodyInContactTpl<Scalar>(pinocchio, contacts),
         DataCollectorActuationTpl<Scalar>(actuation) {}
   virtual ~DataCollectorActMultibodyInContactTpl() {}
@@ -67,7 +67,7 @@ struct DataCollectorJointActMultibodyInContactTpl
       pinocchio::DataTpl<Scalar>* const pinocchio,
       boost::shared_ptr<ActuationDataAbstractTpl<Scalar> > actuation,
       boost::shared_ptr<JointDataAbstractTpl<Scalar> > joint,
-      boost::shared_ptr<ContactDataMultipleTpl<Scalar> > contacts)
+      boost::shared_ptr<KinematicConstraintDataMultipleTpl<Scalar> > contacts)
       : DataCollectorActMultibodyInContactTpl<Scalar>(pinocchio, actuation,
                                                       contacts),
         DataCollectorJointTpl<Scalar>(joint) {}

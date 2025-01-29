@@ -226,7 +226,7 @@ struct ResidualDataContactFrictionConeTpl
   typedef MathBaseTpl<Scalar> MathBase;
   typedef ResidualDataAbstractTpl<Scalar> Base;
   typedef DataCollectorAbstractTpl<Scalar> DataCollectorAbstract;
-  typedef ContactModelMultipleTpl<Scalar> ContactModelMultiple;
+  typedef KinematicConstraintModelMultipleTpl<Scalar> ContactModelMultiple;
   typedef ImpulseModelMultipleTpl<Scalar> ImpulseModelMultiple;
   typedef StateMultibodyTpl<Scalar> StateMultibody;
   typedef typename MathBase::MatrixXs MatrixXs;

@@ -53,7 +53,7 @@ class DifferentialActionModelContactInvDynamicsTpl
   typedef ActuationModelAbstractTpl<Scalar> ActuationModelAbstract;
   typedef CostModelSumTpl<Scalar> CostModelSum;
   typedef ConstraintModelManagerTpl<Scalar> ConstraintModelManager;
-  typedef ContactModelMultipleTpl<Scalar> ContactModelMultiple;
+  typedef KinematicConstraintModelMultipleTpl<Scalar> ContactModelMultiple;
   typedef DataCollectorAbstractTpl<Scalar> DataCollectorAbstract;
   typedef DifferentialActionDataAbstractTpl<Scalar>
       DifferentialActionDataAbstract;
@@ -540,7 +540,7 @@ struct DifferentialActionDataContactInvDynamicsTpl
       DataCollectorJointActMultibodyInContact;
   typedef CostDataSumTpl<Scalar> CostDataSum;
   typedef ConstraintDataManagerTpl<Scalar> ConstraintDataManager;
-  typedef ContactModelMultipleTpl<Scalar> ContactModelMultiple;
+  typedef KinematicConstraintModelMultipleTpl<Scalar> ContactModelMultiple;
   typedef typename MathBase::VectorXs VectorXs;
   typedef typename MathBase::MatrixXs MatrixXs;
 
@@ -617,7 +617,7 @@ struct DifferentialActionDataContactInvDynamicsTpl
     typedef DataCollectorActMultibodyInContactTpl<Scalar>
         DataCollectorActMultibodyInContact;
     typedef ActuationDataAbstractTpl<Scalar> ActuationDataAbstract;
-    typedef ContactDataMultipleTpl<Scalar> ContactDataMultiple;
+    typedef KinematicConstraintDataMultipleTpl<Scalar> ContactDataMultiple;
     typedef typename MathBase::MatrixXs MatrixXs;
 
     template <template <typename Scalar> class Model>
@@ -662,7 +662,7 @@ struct DifferentialActionDataContactInvDynamicsTpl
     typedef DataCollectorAbstractTpl<Scalar> DataCollectorAbstract;
     typedef DataCollectorMultibodyInContactTpl<Scalar>
         DataCollectorMultibodyInContact;
-    typedef ContactModelMultipleTpl<Scalar> ContactModelMultiple;
+    typedef KinematicConstraintModelMultipleTpl<Scalar> ContactModelMultiple;
 
     template <template <typename Scalar> class Model>
     ResidualDataContact(Model<Scalar>* const model,

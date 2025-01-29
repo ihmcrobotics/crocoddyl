@@ -49,7 +49,7 @@ void build_contact_action_models(
   typedef typename crocoddyl::ActuationModelFloatingBaseTpl<Scalar>
       ActuationModelFloatingBase;
   typedef typename crocoddyl::CostModelSumTpl<Scalar> CostModelSum;
-  typedef typename crocoddyl::ContactModelMultipleTpl<Scalar>
+  typedef typename crocoddyl::KinematicConstraintModelMultipleTpl<Scalar>
       ContactModelMultiple;
   typedef typename crocoddyl::CostModelAbstractTpl<Scalar> CostModelAbstract;
   typedef typename crocoddyl::KinematicConstraintModelAbstractTpl<Scalar>
