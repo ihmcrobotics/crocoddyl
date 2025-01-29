@@ -165,7 +165,7 @@ struct ImpulseDataAbstractTpl;
 
 // contact
 template <typename Scalar>
-struct ContactItemTpl;
+struct KinematicConstraintItemTpl;
 template <typename Scalar>
 class ContactModelMultipleTpl;
 template <typename Scalar>
@@ -356,7 +356,7 @@ enum ContactType {
 };
 enum ImpulseType { ImpulseUndefined, Impulse3D, Impulse6D };
 
-typedef ContactItemTpl<double> ContactItem;
+typedef KinematicConstraintItemTpl<double> ContactItem;
 typedef ContactModelMultipleTpl<double> ContactModelMultiple;
 typedef ContactDataMultipleTpl<double> ContactDataMultiple;
 typedef ContactModel1DTpl<double> ContactModel1D;

@@ -22,23 +22,27 @@
 namespace crocoddyl {
 
 template <typename _Scalar>
-struct ContactItemTpl {
+using ContactItemTpl [[deprecated("Use KinematicConstraintItemTpl instead")]] =
+    KinematicConstraintItemTpl<_Scalar>;
+
+template <typename _Scalar>
+struct KinematicConstraintItemTpl {
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
   typedef _Scalar Scalar;
   typedef KinematicConstraintModelAbstractTpl<Scalar> ContactModelAbstract;
 
-  ContactItemTpl() {}
-  ContactItemTpl(const std::string& name,
-                 boost::shared_ptr<ContactModelAbstract> contact,
-                 const bool active = true)
+  KinematicConstraintItemTpl() {}
+  KinematicConstraintItemTpl(const std::string& name,
+                             boost::shared_ptr<ContactModelAbstract> contact,
+                             const bool active = true)
       : name(name), contact(contact), active(active) {}
 
   /**
    * @brief Print information on the contact item
    */
-  friend std::ostream& operator<<(std::ostream& os,
-                                  const ContactItemTpl<Scalar>& model) {
+  friend std::ostream& operator<<(
+      std::ostream& os, const KinematicConstraintItemTpl<Scalar>& model) {
     os << "{" << *model.contact << "}";
     return os;
   }
@@ -68,7 +72,7 @@ class ContactModelMultipleTpl {
   typedef ContactDataMultipleTpl<Scalar> ContactDataMultiple;
   typedef KinematicConstraintModelAbstractTpl<Scalar> ContactModelAbstract;
 
-  typedef ContactItemTpl<Scalar> ContactItem;
+  typedef KinematicConstraintItemTpl<Scalar> ContactItem;
 
   typedef typename MathBase::Vector2s Vector2s;
   typedef typename MathBase::Vector3s Vector3s;
@@ -299,7 +303,7 @@ struct ContactDataMultipleTpl {
   typedef _Scalar Scalar;
   typedef MathBaseTpl<Scalar> MathBase;
   typedef ContactModelMultipleTpl<Scalar> ContactModelMultiple;
-  typedef ContactItemTpl<Scalar> ContactItem;
+  typedef KinematicConstraintItemTpl<Scalar> ContactItem;
   typedef typename MathBase::VectorXs VectorXs;
   typedef typename MathBase::MatrixXs MatrixXs;
 

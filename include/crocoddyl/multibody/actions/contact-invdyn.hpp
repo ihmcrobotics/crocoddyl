@@ -57,7 +57,7 @@ class DifferentialActionModelContactInvDynamicsTpl
   typedef DataCollectorAbstractTpl<Scalar> DataCollectorAbstract;
   typedef DifferentialActionDataAbstractTpl<Scalar>
       DifferentialActionDataAbstract;
-  typedef ContactItemTpl<Scalar> ContactItem;
+  typedef KinematicConstraintItemTpl<Scalar> ContactItem;
   typedef MathBaseTpl<Scalar> MathBase;
   typedef typename MathBase::VectorXs VectorXs;
   typedef typename MathBase::MatrixXs MatrixXs;
