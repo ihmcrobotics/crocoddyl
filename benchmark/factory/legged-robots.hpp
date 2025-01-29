@@ -52,7 +52,7 @@ void build_contact_action_models(
   typedef typename crocoddyl::ContactModelMultipleTpl<Scalar>
       ContactModelMultiple;
   typedef typename crocoddyl::CostModelAbstractTpl<Scalar> CostModelAbstract;
-  typedef typename crocoddyl::ContactModelAbstractTpl<Scalar>
+  typedef typename crocoddyl::KinematicConstraintModelAbstractTpl<Scalar>
       ContactModelAbstract;
   typedef typename crocoddyl::CostModelResidualTpl<Scalar> CostModelResidual;
   typedef typename crocoddyl::ResidualModelFramePlacementTpl<Scalar>

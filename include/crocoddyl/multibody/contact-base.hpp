@@ -21,13 +21,23 @@
 namespace crocoddyl {
 
 template <typename _Scalar>
-class ContactModelAbstractTpl {
+using ContactModelAbstractTpl
+    [[deprecated("Use KinematicConstraintModelAbstractTpl instead")]] =
+        KinematicConstraintModelAbstractTpl<_Scalar>;
+
+template <typename _Scalar>
+using ContactDataAbstractTpl
+    [[deprecated("Use KinematicConstraintDataAbstractTpl instead")]] =
+        KinematicConstraintDataAbstractTpl<_Scalar>;
+
+template <typename _Scalar>
+class KinematicConstraintModelAbstractTpl {
  public:
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
   typedef _Scalar Scalar;
   typedef MathBaseTpl<Scalar> MathBase;
-  typedef ContactDataAbstractTpl<Scalar> ContactDataAbstract;
+  typedef KinematicConstraintDataAbstractTpl<Scalar> ContactDataAbstract;
   typedef StateMultibodyTpl<Scalar> StateMultibody;
   typedef typename MathBase::VectorXs VectorXs;
   typedef typename MathBase::MatrixXs MatrixXs;
@@ -40,24 +50,26 @@ class ContactModelAbstractTpl {
    * @param[in] nc     Dimension of the contact model
    * @param[in] nu     Dimension of the control vector
    */
-  ContactModelAbstractTpl(boost::shared_ptr<StateMultibody> state,
-                          const pinocchio::ReferenceFrame type,
-                          const std::size_t nc, const std::size_t nu);
-  ContactModelAbstractTpl(boost::shared_ptr<StateMultibody> state,
-                          const pinocchio::ReferenceFrame type,
-                          const std::size_t nc);
+  KinematicConstraintModelAbstractTpl(boost::shared_ptr<StateMultibody> state,
+                                      const pinocchio::ReferenceFrame type,
+                                      const std::size_t nc,
+                                      const std::size_t nu);
+  KinematicConstraintModelAbstractTpl(boost::shared_ptr<StateMultibody> state,
+                                      const pinocchio::ReferenceFrame type,
+                                      const std::size_t nc);
 
   DEPRECATED(
       "Use constructor that passes the type type of contact, this assumes is "
       "pinocchio::LOCAL",
-      ContactModelAbstractTpl(boost::shared_ptr<StateMultibody> state,
-                              const std::size_t nc, const std::size_t nu);)
+      KinematicConstraintModelAbstractTpl(
+          boost::shared_ptr<StateMultibody> state, const std::size_t nc,
+          const std::size_t nu);)
   DEPRECATED(
       "Use constructor that passes the type type of contact, this assumes is "
       "pinocchio::LOCAL",
-      ContactModelAbstractTpl(boost::shared_ptr<StateMultibody> state,
-                              const std::size_t nc);)
-  virtual ~ContactModelAbstractTpl();
+      KinematicConstraintModelAbstractTpl(
+          boost::shared_ptr<StateMultibody> state, const std::size_t nc);)
+  virtual KinematicConstraintModelAbstractTpl();
 
   /**
    * @brief Compute the contact Jacobian and acceleration drift
@@ -158,8 +170,9 @@ class ContactModelAbstractTpl {
    * @brief Print information on the contact model
    */
   template <class Scalar>
-  friend std::ostream& operator<<(std::ostream& os,
-                                  const ContactModelAbstractTpl<Scalar>& model);
+  friend std::ostream& operator<<(
+      std::ostream& os,
+      const KinematicConstraintModelAbstractTpl<Scalar>& model);
 
   /**
    * @brief Print relevant information of the contact model
@@ -177,7 +190,8 @@ class ContactModelAbstractTpl {
 };
 
 template <typename _Scalar>
-struct ContactDataAbstractTpl : public ForceDataAbstractTpl<_Scalar> {
+struct KinematicConstraintDataAbstractTpl
+    : public ForceDataAbstractTpl<_Scalar> {
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
   typedef _Scalar Scalar;
@@ -188,8 +202,8 @@ struct ContactDataAbstractTpl : public ForceDataAbstractTpl<_Scalar> {
   typedef typename pinocchio::SE3Tpl<Scalar> SE3;
 
   template <template <typename Scalar> class Model>
-  ContactDataAbstractTpl(Model<Scalar>* const model,
-                         pinocchio::DataTpl<Scalar>* const data)
+  KinematicConstraintDataAbstractTpl(Model<Scalar>* const model,
+                                     pinocchio::DataTpl<Scalar>* const data)
       : Base(model, data),
         fXj(jMf.inverse().toActionMatrix()),
         a0(model->get_nc()),
@@ -199,7 +213,7 @@ struct ContactDataAbstractTpl : public ForceDataAbstractTpl<_Scalar> {
     da0_dx.setZero();
     dtau_dq.setZero();
   }
-  virtual ~ContactDataAbstractTpl() {}
+  virtual ~KinematicConstraintDataAbstractTpl() {}
 
   using Base::df_du;
   using Base::df_dx;

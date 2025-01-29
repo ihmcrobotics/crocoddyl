@@ -149,7 +149,7 @@ void ContactModel2DTpl<Scalar>::updateForce(
 }
 
 template <typename Scalar>
-boost::shared_ptr<ContactDataAbstractTpl<Scalar> >
+boost::shared_ptr<KinematicConstraintDataAbstractTpl<Scalar> >
 ContactModel2DTpl<Scalar>::createData(pinocchio::DataTpl<Scalar>* const data) {
   return boost::allocate_shared<Data>(Eigen::aligned_allocator<Data>(), this,
                                       data);

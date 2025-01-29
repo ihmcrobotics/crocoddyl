@@ -75,7 +75,7 @@ void ContactModelNumDiffTpl<Scalar>::updateForce(
 }
 
 template <typename Scalar>
-boost::shared_ptr<ContactDataAbstractTpl<Scalar> >
+boost::shared_ptr<KinematicConstraintDataAbstractTpl<Scalar> >
 ContactModelNumDiffTpl<Scalar>::createData(
     pinocchio::DataTpl<Scalar>* const data) {
   return boost::allocate_shared<Data>(Eigen::aligned_allocator<Data>(), this,
@@ -83,7 +83,7 @@ ContactModelNumDiffTpl<Scalar>::createData(
 }
 
 template <typename Scalar>
-const boost::shared_ptr<ContactModelAbstractTpl<Scalar> >&
+const boost::shared_ptr<KinematicConstraintModelAbstractTpl<Scalar> >&
 ContactModelNumDiffTpl<Scalar>::get_model() const {
   return model_;
 }

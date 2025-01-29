@@ -21,16 +21,16 @@
 namespace crocoddyl {
 
 template <typename _Scalar>
-class ContactModel2DTpl : public ContactModelAbstractTpl<_Scalar> {
+class ContactModel2DTpl : public KinematicConstraintModelAbstractTpl<_Scalar> {
  public:
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
   typedef _Scalar Scalar;
   typedef MathBaseTpl<Scalar> MathBase;
-  typedef ContactModelAbstractTpl<Scalar> Base;
+  typedef KinematicConstraintModelAbstractTpl<Scalar> Base;
   typedef ContactData2DTpl<Scalar> Data;
   typedef StateMultibodyTpl<Scalar> StateMultibody;
-  typedef ContactDataAbstractTpl<Scalar> ContactDataAbstract;
+  typedef KinematicConstraintDataAbstractTpl<Scalar> ContactDataAbstract;
   typedef typename MathBase::Vector2s Vector2s;
   typedef typename MathBase::Vector3s Vector3s;
   typedef typename MathBase::VectorXs VectorXs;
@@ -134,12 +134,12 @@ class ContactModel2DTpl : public ContactModelAbstractTpl<_Scalar> {
 };
 
 template <typename _Scalar>
-struct ContactData2DTpl : public ContactDataAbstractTpl<_Scalar> {
+struct ContactData2DTpl : public KinematicConstraintDataAbstractTpl<_Scalar> {
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
   typedef _Scalar Scalar;
   typedef MathBaseTpl<Scalar> MathBase;
-  typedef ContactDataAbstractTpl<Scalar> Base;
+  typedef KinematicConstraintDataAbstractTpl<Scalar> Base;
   typedef typename MathBase::Matrix2s Matrix2s;
   typedef typename MathBase::Matrix3s Matrix3s;
   typedef typename MathBase::Matrix6xs Matrix6xs;

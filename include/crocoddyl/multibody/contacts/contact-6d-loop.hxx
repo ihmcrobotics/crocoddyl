@@ -222,7 +222,7 @@ void ContactModel6DLoopTpl<Scalar>::updateForceDiff(
 }
 
 template <typename Scalar>
-boost::shared_ptr<ContactDataAbstractTpl<Scalar>>
+boost::shared_ptr<KinematicConstraintDataAbstractTpl<Scalar>>
 ContactModel6DLoopTpl<Scalar>::createData(
     pinocchio::DataTpl<Scalar> *const data) {
   return boost::allocate_shared<Data>(Eigen::aligned_allocator<Data>(), this,

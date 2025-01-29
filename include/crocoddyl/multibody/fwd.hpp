@@ -37,9 +37,9 @@ struct ForceDataAbstractTpl;
 
 // contact
 template <typename Scalar>
-class ContactModelAbstractTpl;
+class KinematicConstraintModelAbstractTpl;
 template <typename Scalar>
-struct ContactDataAbstractTpl;
+struct KinematicConstraintDataAbstractTpl;
 
 // action
 template <typename Scalar>
@@ -269,8 +269,8 @@ DEPRECATED("Use ActuationModelFloatingBaseThrustersTpl",
 
 typedef ForceDataAbstractTpl<double> ForceDataAbstract;
 
-typedef ContactModelAbstractTpl<double> ContactModelAbstract;
-typedef ContactDataAbstractTpl<double> ContactDataAbstract;
+typedef KinematicConstraintModelAbstractTpl<double> ContactModelAbstract;
+typedef KinematicConstraintDataAbstractTpl<double> ContactDataAbstract;
 
 typedef ActionModelImpulseFwdDynamicsTpl<double> ActionModelImpulseFwdDynamics;
 typedef ActionDataImpulseFwdDynamicsTpl<double> ActionDataImpulseFwdDynamics;

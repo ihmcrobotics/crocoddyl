@@ -26,7 +26,7 @@ struct ContactItemTpl {
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
   typedef _Scalar Scalar;
-  typedef ContactModelAbstractTpl<Scalar> ContactModelAbstract;
+  typedef KinematicConstraintModelAbstractTpl<Scalar> ContactModelAbstract;
 
   ContactItemTpl() {}
   ContactItemTpl(const std::string& name,
@@ -64,9 +64,9 @@ class ContactModelMultipleTpl {
   typedef _Scalar Scalar;
   typedef MathBaseTpl<Scalar> MathBase;
   typedef StateMultibodyTpl<Scalar> StateMultibody;
-  typedef ContactDataAbstractTpl<Scalar> ContactDataAbstract;
+  typedef KinematicConstraintDataAbstractTpl<Scalar> ContactDataAbstract;
   typedef ContactDataMultipleTpl<Scalar> ContactDataMultiple;
-  typedef ContactModelAbstractTpl<Scalar> ContactModelAbstract;
+  typedef KinematicConstraintModelAbstractTpl<Scalar> ContactModelAbstract;
 
   typedef ContactItemTpl<Scalar> ContactItem;
 

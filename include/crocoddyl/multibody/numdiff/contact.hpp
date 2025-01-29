@@ -18,13 +18,13 @@
 namespace crocoddyl {
 
 template <typename _Scalar>
-class ContactModelNumDiffTpl : public ContactModelAbstractTpl<_Scalar> {
+class ContactModelNumDiffTpl : public KinematicConstraintModelAbstractTpl<_Scalar> {
  public:
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
   typedef _Scalar Scalar;
-  typedef ContactDataAbstractTpl<Scalar> ContactDataAbstract;
-  typedef ContactModelAbstractTpl<Scalar> Base;
+  typedef KinematicConstraintDataAbstractTpl<Scalar> ContactDataAbstract;
+  typedef KinematicConstraintModelAbstractTpl<Scalar> Base;
   typedef ContactDataNumDiffTpl<Scalar> Data;
   typedef MathBaseTpl<Scalar> MathBase;
   typedef typename MathBaseTpl<Scalar>::VectorXs VectorXs;
@@ -124,12 +124,12 @@ class ContactModelNumDiffTpl : public ContactModelAbstractTpl<_Scalar> {
 };
 
 template <typename _Scalar>
-struct ContactDataNumDiffTpl : public ContactDataAbstractTpl<_Scalar> {
+struct ContactDataNumDiffTpl : public KinematicConstraintDataAbstractTpl<_Scalar> {
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
   typedef _Scalar Scalar;
   typedef MathBaseTpl<Scalar> MathBase;
-  typedef ContactDataAbstractTpl<Scalar> Base;
+  typedef KinematicConstraintDataAbstractTpl<Scalar> Base;
   typedef typename MathBaseTpl<Scalar>::VectorXs VectorXs;
 
   template <template <typename Scalar> class Model>

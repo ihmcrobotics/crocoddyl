@@ -687,7 +687,7 @@ struct DifferentialActionDataContactInvDynamicsTpl
       }
     }
 
-    ContactDataAbstractTpl<Scalar>* contact;  //!< Contact force data
+    KinematicConstraintDataAbstractTpl<Scalar>* contact;  //!< Contact force data
     using Base::r;
     using Base::Ru;
     using Base::Rx;

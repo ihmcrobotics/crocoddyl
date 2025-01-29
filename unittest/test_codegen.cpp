@@ -250,14 +250,14 @@ build_bipedal_action_model() {
       ResidualModelContactForce;
   typedef typename crocoddyl::ResidualModelCentroidalMomentumTpl<Scalar>
       ResidualModelCentroidalMomentum;
-  typedef typename crocoddyl::ContactModelAbstractTpl<Scalar>
+  typedef typename crocoddyl::KinematicConstraintModelAbstractTpl<Scalar>
       ContactModelAbstract;
   typedef typename crocoddyl::ContactModelMultipleTpl<Scalar>
       ContactModelMultiple;
   typedef typename crocoddyl::ContactModel6DTpl<Scalar> ContactModel6D;
   typedef typename crocoddyl::ContactModel3DTpl<Scalar> ContactModel3D;
   typedef typename crocoddyl::CostModelSumTpl<Scalar> CostModelSum;
-  typedef typename crocoddyl::ContactModelAbstractTpl<Scalar>
+  typedef typename crocoddyl::KinematicConstraintModelAbstractTpl<Scalar>
       ContactModelAbstract;
   typedef typename crocoddyl::ContactModelMultipleTpl<Scalar>
       ContactModelMultiple;
