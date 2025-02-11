@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+* Updated the rotation transpose in contact wrench cone to re-use the same object to avoid additional transpose operations.
+* Switched to a multiply operation instead of divide for efficiency.
+
 ## [2.1.0] - 2024-05-31
 
 * Updated black + isort + flake8 to ruff in https://github.com/loco-3d/crocoddyl/pull/1256
