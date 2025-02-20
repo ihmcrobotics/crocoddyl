@@ -194,9 +194,9 @@ class ActuationModelFloatingBaseThrustersTpl
                     const Eigen::Ref<const VectorXs>&,
                     const Eigen::Ref<const VectorXs>& u) {
     if (static_cast<std::size_t>(u.size()) != nu_) {
-      throw_pretty("Invalid argument: "
-                   << "u has wrong dimension (it should be " +
-                          std::to_string(nu_) + ")");
+      throw_pretty(
+          "Invalid argument: " << "u has wrong dimension (it should be " +
+                                      std::to_string(nu_) + ")");
     }
     if (update_data_) {
       updateData(data);
@@ -288,7 +288,7 @@ class ActuationModelFloatingBaseThrustersTpl
       const Vector3s& f_z = p.pose.rotation() * Vector3s::UnitZ();
       W_thrust_.template topRows<3>().col(i) += f_z;
       W_thrust_.template middleRows<3>(3).col(i).noalias() +=
-          p.pose.translation().cross(Vector3s::UnitZ());
+          p.pose.translation().cross(f_z);
       switch (p.type) {
         case CW:
           W_thrust_.template middleRows<3>(3).col(i) += p.ctorque * f_z;
