@@ -7,6 +7,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 * Added 6D loop contacts to account for contacts between parts of the robot in https://github.com/loco-3d/crocoddyl/pull/1309
+## [2.2.0] - 1980-01-01
+
+* Changed return policy in std::vector of Eigen's vector and matrices to be compliant with Pinocchio in https://github.com/loco-3d/crocoddyl/pull/1338
+* Prevent users to improperly setting residual references in https://github.com/loco-3d/crocoddyl/pull/1332
 * Fixed the inequality constraints' feasibility computation by incorporating bounds into the calculation in https://github.com/loco-3d/crocoddyl/pull/1307
 * Improved the action factory used for unit testing in https://github.com/loco-3d/crocoddyl/pull/1300
 * Ignore ruff issues in ipython notebook files in https://github.com/loco-3d/crocoddyl/pull/1297

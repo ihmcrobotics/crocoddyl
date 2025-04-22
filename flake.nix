@@ -3,9 +3,7 @@
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
-    #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # use gepetto fork until https://github.com/NixOS/nixpkgs/pull/324018
-    nixpkgs.url = "github:gepetto/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
   outputs =
@@ -19,7 +17,10 @@
             type = "app";
             program = pkgs.python3.withPackages (_: [ self'.packages.default ]);
           };
-          devShells.default = pkgs.mkShell { inputsFrom = [ self'.packages.default ]; };
+          devShells.default = pkgs.mkShell {
+            inputsFrom = [ self'.packages.default ];
+            packages = [ (pkgs.python3.withPackages (p: [p.tomlkit])) ]; # for "make release"
+          };
           packages = {
             default = self'.packages.crocoddyl;
             crocoddyl = pkgs.python3Packages.crocoddyl.overrideAttrs (_: {
